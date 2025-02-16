@@ -1,10 +1,10 @@
-# Socarium: Comprehensive SOC Management Package
+# MakaraSOC: Comprehensive SOC Management Package
 
 ---
 
 ## Overview
 
-**Socarium** is a modular, open-source Security Operations Center (SOC) management package designed to simplify the deployment, management, and testing of SOC platforms. Developed collaboratively by **JICA** and **idCARE UI**, Socarium integrates industry-standard tools like Wazuh, DFIR IRIS, Shuffle, MISP, and OpenCTI, providing a streamlined approach to cybersecurity monitoring, analysis, and incident response.
+**Socarium** is a modular, open-source Security Operations Center (SOC) management package designed to simplify the deployment, management, and testing of SOC platforms. Developed collaboratively **idCARE UI** and supported by **JICA**, MakaraSOC integrates industry-standard tools like Wazuh, DFIR IRIS, Shuffle, MISP, Velociraptor, and OpenCTI, providing a streamlined approach to cybersecurity monitoring, analysis, and incident response.
 
 <div align="center" width="100" height="100">
 
@@ -28,7 +28,7 @@
    - Each SOC platform is managed independently, ensuring flexibility and scalability.
 
 2. **Centralized Management**
-   - A single `setup.sh` script handles installation, configuration, and management.
+   - A single `main.sh` script handles installation, configuration, and management.
 
 3. **Integrated Proof of Concept (PoC) Testing**
    - Attack simulations included to validate platform functionality.
@@ -90,28 +90,8 @@ Installation and configuration manuals please refers into GitHub Wiki (https://g
 
 ---
 
-## Setup Script Menu
 
-The `main.sh` script provides an intuitive menu for managing Socarium:
-
-| **Option**                       | **Description**                                                                 |
-|----------------------------------|---------------------------------------------------------------------------------|
-| **0) Install Prerequisites**     | Installs Docker, Docker Compose, and other necessary tools.                     |
-| **1) Deploy All Core Services**  | Installs all SOC platforms at once.                                             |
-| **2) Deploy Wazuh**              | Installs the Wazuh platform independently.                                      |
-| **3) Deploy DFIR IRIS**          | Installs the DFIR IRIS platform independently.                                  |
-| **4) Deploy Shuffle**            | Installs the Shuffle platform independently.                                    |
-| **5) Deploy MISP**               | Installs the MISP platform independently.                                       |
-| **6) Deploy Velociraptor**       | Installs the Veliciraptor platform independently.                               |
-| **7) Deploy Yara**               | Installs Yara for advanced file scanning and malware detection.                 |
-| **8) Deploy OpenCTI**            | Installs the OpenCTI platform independently.                                    |
-| **9) Deploy Grafana**           | Installs the Grafana platform independently.                                    |
-| **10) Socarium Configurations**  | Configuration the integration parts.                                            |
-| **11) Exit**                     | Exits the script.                                                               |
-
----
-
-## Proof of Concept (PoC)
+## Proof of Concept (PoC) Coming soon
 
 The `poc/` folder contains scripts and descriptions for attack simulations:
 
@@ -142,7 +122,7 @@ The `poc/` folder contains scripts and descriptions for attack simulations:
 
 ## Contributing
 
-We welcome contributions to improve Socarium. Please submit issues or pull requests on the repository.
+We welcome contributions to improve MakaraSOC. Please submit issues or pull requests on the repository.
 
 ---
 
