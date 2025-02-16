@@ -53,6 +53,7 @@
 | `modules/`                  | Contains Docker Compose configurations for SOC platforms.                  |
 | `config/`                   | Contain configuration of the dockers environtment.                         |
 
+---
 
 ### **PoC Folder Structure**
 
