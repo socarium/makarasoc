@@ -17,7 +17,7 @@ fi
 # get directory where this script install_all.sh executed
 BASE_DIR=$(pwd)
 
-SOC_DIR="/home/$(logname)/socarium"
+SOC_DIR="/home/$(logname)/makarasoc"
 
 cd "$SOC_DIR"
 
