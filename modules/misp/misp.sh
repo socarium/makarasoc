@@ -17,7 +17,7 @@ else
     exit 1
 fi
 
-SOC_DIR="/home/$(logname)/socarium"
+SOC_DIR="/home/$(logname)/makarasoc"
 
 cd "$SOC_DIR"
 
