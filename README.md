@@ -12,8 +12,8 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/wahyusutejo1986/socarium/blob/main/images/socarium.png">
-    <img src="images/socarium.png">
+    <a href="https://github.com/socarium/makarasoc/blob/main/images/makara.png">
+    <img src="images/makara.png">
     </a>
     <br />
     <br />
