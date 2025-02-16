@@ -170,7 +170,7 @@ iris_module_veloartifact() {
         cd $BASE_DIR
 }
 
-socarium_config() {
+tools_config() {
     while true; do
         SECONDARY_CHOICE=$(whiptail --title "Configuration Menu" --menu "Choose a configuration option:" 20 78 12 \
             "1" "Integration Wazuh - DFIR IRIS" \
@@ -206,8 +206,8 @@ while true; do
         "6" "Deploy Yara" \
         "7" "Deploy OpenCTI" \
         "8" "Deploy Grafana" \
-        "9" "Socarium Configurations" \
-        "10" "Exit" 3>&1 1>&2 2>&3)
+        "9" "Tools Configurations" \
+        "10" "Return to Main Menu" 3>&1 1>&2 2>&3)
 
     case $CHOICE in
         0) log "Installing prerequisites..."; sudo ./install_prerequisites.sh ;;
@@ -219,8 +219,8 @@ while true; do
         6) deploy_yara ;;
         7) deploy_opencti ;;
         8) deploy_grafana ;;
-        9) socarium_config ;;
-        10) log "Exiting menu."; exit 0 ;;
+        9) tools_config ;;
+        10) log "Returning to Main Menu."; break ;; # Exit manually menu
         *) log "Invalid option. Please try again." ;;
     esac
 done
@@ -231,12 +231,12 @@ while true; do
     CHOICE=$(whiptail --title "MakaraSOC Deployment Menu" --menu "Choose an option:" 20 78 12 \
         "1" "Deploy All Core services" \
         "2" "Socarium Configurations" \
-        "3" "Exit" 3>&1 1>&2 2>&3)
+        "3" "Return to Main Menu" 3>&1 1>&2 2>&3)
 
     case $CHOICE in
         1) deploy_all ;;
         2) socarium_config ;;
-        3) log "Exiting menu."; exit 0 ;;
+        3) log "Returning to Main Menu."; break ;; # Exit semiauto menu
         *) log "Invalid option. Please try again." ;;
     esac
 done
