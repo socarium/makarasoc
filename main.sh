@@ -196,7 +196,7 @@ socarium_config() {
 
 socarium_manual_config() {
 while true; do
-    CHOICE=$(whiptail --title "Socarium SOC Packages Deployment Menu" --menu "Choose an option:" 20 78 12 \
+    CHOICE=$(whiptail --title "MakaraSOC Deployment Menu" --menu "Choose an option:" 20 78 12 \
         "0" "Install Prerequisites" \
         "1" "Deploy Wazuh" \
         "2" "Deploy DFIR IRIS" \
@@ -228,7 +228,7 @@ done
 
 deploy_all_semiauto() {
 while true; do
-    CHOICE=$(whiptail --title "Socarium SOC Packages Deployment Menu" --menu "Choose an option:" 20 78 12 \
+    CHOICE=$(whiptail --title "MakaraSOC Deployment Menu" --menu "Choose an option:" 20 78 12 \
         "1" "Deploy All Core services" \
         "2" "Socarium Configurations" \
         "3" "Exit" 3>&1 1>&2 2>&3)
@@ -244,7 +244,7 @@ done
 
 #First Menu
 while true; do
-    CHOICE=$(whiptail --title "Socarium SOC Packages Deployment Menu" --menu "Choose an option:" 20 78 12 \
+    CHOICE=$(whiptail --title "MakaraSOC Deployment Menu" --menu "Choose an option:" 20 78 12 \
         "1" "I'm New to This" \
         "2" "I Know What I'm Doing" \
         "3" "Exit" 3>&1 1>&2 2>&3)
