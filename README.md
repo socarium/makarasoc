@@ -86,7 +86,7 @@
 
 ## Installation and Setup
 
-Installation and configuration manuals please refers into GitHub Wiki (https://github.com/wahyusutejo1986/socarium/wiki)
+Installation and configuration manuals please refers into Coming Soon
 
 ---
 
