@@ -53,17 +53,6 @@
 | `modules/`                  | Contains Docker Compose configurations for SOC platforms.                  |
 | `config/`                   | Contain configuration of the dockers environtment.                         |
 
-### **Modules Folder Structure**
-
-| **Platform**        | **Docker Compose Location**                     |
-|---------------------|-------------------------------------------------|
-| **Wazuh**           | `modules/wazuh/docker-compose.yml`              |
-| **IRIS**            | `modules/iris-web/docker-compose.yml`           |
-| **Shuffle**         | `modules/shuffle/docker-compose.yml`            |
-| **MISP**            | `modules/misp/docker-compose.yml`               |
-| **Velociraptor**    | `modules/velociraptor/docker-compose.yml`       |
-| **Grafana**         | `modules/grafana/docker-compose.yml`            |
-| **OpenCTI**         | `modules/opencti/docker-compose.yml`            |
 
 ### **PoC Folder Structure**
 
