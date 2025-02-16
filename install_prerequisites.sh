@@ -3,17 +3,12 @@ set -e  # Exit on any error
 
 install_prerequisites() {
     echo "🛠 Installing prerequisites..."
-    # sudo apt update && sudo apt -y upgrade || error_handler "System Update"
     sudo apt install -y git curl wget python3-pip whiptail jq openjdk-18-jre-headless|| error_handler "Prerequisites Installation"
 }
 
 echo "=============================="
 echo "Docker & Docker-Compose Setup"
 echo "=============================="
-
-# Step 1: Update the system
-#echo "Updating system packages..."
-#sudo apt update -y
 
 # Step 1: Install Python
 echo "Installing python packages..."
