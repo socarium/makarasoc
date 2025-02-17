@@ -230,12 +230,12 @@ deploy_all_semiauto() {
 while true; do
     CHOICE=$(whiptail --title "MakaraSOC Deployment Menu" --menu "Choose an option:" 20 78 12 \
         "1" "Deploy All Core services" \
-        "2" "Socarium Configurations" \
+        "2" "Tools Configurations" \
         "3" "Return to Main Menu" 3>&1 1>&2 2>&3)
 
     case $CHOICE in
         1) deploy_all ;;
-        2) socarium_config ;;
+        2) tools_config ;;
         3) log "Returning to Main Menu."; break ;; # Exit semiauto menu
         *) log "Invalid option. Please try again." ;;
     esac
