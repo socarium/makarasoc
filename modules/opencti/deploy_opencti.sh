@@ -11,14 +11,14 @@ else
     sudo docker network create socarium-network
 fi
 
-sudo cp .env.sample .env
-
-# Append configuration to .env
-cat << EOF | sudo tee -a .env
+sudo apt install -y jq
+sleep 10 #Check the system
+(cat << EOF
 OPENCTI_ADMIN_EMAIL=admin@opencti.io
-OPENCTI_ADMIN_PASSWORD=ChangeMePlease
+OPENCTI_ADMIN_PASSWORD=socarium
 OPENCTI_ADMIN_TOKEN=$(cat /proc/sys/kernel/random/uuid)
-OPENCTI_BASE_URL=http://103.82.92.195:8282
+OPENCTI_BASE_URL=http://localhost:8080
+OPENCTI_HEALTHCHECK_ACCESS_KEY=$(cat /proc/sys/kernel/random/uuid)
 MINIO_ROOT_USER=$(cat /proc/sys/kernel/random/uuid)
 MINIO_ROOT_PASSWORD=$(cat /proc/sys/kernel/random/uuid)
 RABBITMQ_DEFAULT_USER=guest
@@ -30,9 +30,10 @@ CONNECTOR_EXPORT_FILE_CSV_ID=$(cat /proc/sys/kernel/random/uuid)
 CONNECTOR_IMPORT_FILE_STIX_ID=$(cat /proc/sys/kernel/random/uuid)
 CONNECTOR_EXPORT_FILE_TXT_ID=$(cat /proc/sys/kernel/random/uuid)
 CONNECTOR_IMPORT_DOCUMENT_ID=$(cat /proc/sys/kernel/random/uuid)
+CONNECTOR_ANALYSIS_ID=$(cat /proc/sys/kernel/random/uuid)
 SMTP_HOSTNAME=localhost
 EOF
-
+) > .env
 
 # running openCTI Container
 sudo docker-compose up -d
