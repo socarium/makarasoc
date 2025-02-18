@@ -1,6 +1,6 @@
 services:
   redis:
-    image: redis:7.4.1
+    image: redis:7.4.2
     restart: always
     volumes:
       - redisdata:/data
@@ -9,18 +9,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    networks:
-      - socarium-network
-
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.2
     volumes:
       - esdata:/usr/share/elasticsearch/data
-    ports:
-      - "9205"
-      - "9305"
     environment:
+      # Comment-out the line below for a cluster of multiple nodes
       - discovery.type=single-node
+      # Uncomment the line below below for a cluster of multiple nodes
+      # - cluster.name=docker-cluster
       - xpack.ml.enabled=false
       - xpack.security.enabled=false
       - thread_pool.search.queue_size=5000
@@ -35,15 +32,12 @@ services:
         soft: 65536
         hard: 65536
     healthcheck:
-      test: curl -s http://elasticsearch:9205 >/dev/null || exit 1
+      test: curl -s http://elasticsearch:9200 >/dev/null || exit 1
       interval: 30s
       timeout: 10s
       retries: 50
-    networks:
-      - socarium-network
-
   minio:
-    image: minio/minio:RELEASE.2024-05-28T17-19-04Z
+    image: minio/minio:RELEASE.2024-05-28T17-19-04Z # Use "minio/minio:RELEASE.2024-05-28T17-19-04Z-cpuv1" to troubleshoot compatibility issues with CPU
     volumes:
       - s3data:/data
     ports:
@@ -58,9 +52,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    networks:
-      - socarium-network
-
   rabbitmq:
     image: rabbitmq:4.0-management
     environment:
@@ -75,22 +66,19 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
-    networks:
-      - socarium-network
-
   opencti:
-    image: opencti/platform:6.4.4
+    image: opencti/platform:6.5.2
     environment:
       - NODE_OPTIONS=--max-old-space-size=8096
-      - APP__PORT=8282
+      - APP__PORT=8080
       - APP__BASE_URL=${OPENCTI_BASE_URL}
       - APP__ADMIN__EMAIL=${OPENCTI_ADMIN_EMAIL}
       - APP__ADMIN__PASSWORD=${OPENCTI_ADMIN_PASSWORD}
       - APP__ADMIN__TOKEN=${OPENCTI_ADMIN_TOKEN}
       - APP__APP_LOGS__LOGS_LEVEL=error
       - REDIS__HOSTNAME=redis
-      - REDIS__PORT=6479
-      - ELASTICSEARCH__URL=http://elasticsearch:9205
+      - REDIS__PORT=6379
+      - ELASTICSEARCH__URL=http://elasticsearch:9200
       - ELASTICSEARCH__NUMBER_OF_REPLICAS=0
       - MINIO__ENDPOINT=minio
       - MINIO__PORT=9000
@@ -108,7 +96,7 @@ services:
       - PROVIDERS__LOCAL__STRATEGY=LocalStrategy
       - APP__HEALTH_ACCESS_KEY=${OPENCTI_HEALTHCHECK_ACCESS_KEY}
     ports:
-      - "8282:8282"
+      - "8080:8080"
     depends_on:
       redis:
         condition: service_healthy
@@ -120,16 +108,14 @@ services:
         condition: service_healthy
     restart: always
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://opencti:8282/health?health_access_key=${OPENCTI_HEALTHCHECK_ACCESS_KEY}"]
+      test:  ["CMD", "wget", "-qO-", "http://opencti:8080/health?health_access_key=${OPENCTI_HEALTHCHECK_ACCESS_KEY}"]
       interval: 10s
       timeout: 5s
       retries: 20
-    networks:
-      - socarium-network
   worker:
-    image: opencti/worker:6.4.4
+    image: opencti/worker:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - WORKER_LOG_LEVEL=info
     depends_on:
@@ -140,9 +126,9 @@ services:
       replicas: 3
     restart: always
   connector-export-file-stix:
-    image: opencti/connector-export-file-stix:6.4.4
+    image: opencti/connector-export-file-stix:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_STIX_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
@@ -154,9 +140,9 @@ services:
       opencti:
         condition: service_healthy
   connector-export-file-csv:
-    image: opencti/connector-export-file-csv:6.4.4
+    image: opencti/connector-export-file-csv:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_CSV_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
@@ -168,9 +154,9 @@ services:
       opencti:
         condition: service_healthy
   connector-export-file-txt:
-    image: opencti/connector-export-file-txt:6.4.4
+    image: opencti/connector-export-file-txt:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_EXPORT_FILE_TXT_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_EXPORT_FILE
@@ -182,9 +168,9 @@ services:
       opencti:
         condition: service_healthy
   connector-import-file-stix:
-    image: opencti/connector-import-file-stix:6.4.4
+    image: opencti/connector-import-file-stix:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_IMPORT_FILE_STIX_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
@@ -198,9 +184,9 @@ services:
       opencti:
         condition: service_healthy
   connector-import-document:
-    image: opencti/connector-import-document:6.4.4
+    image: opencti/connector-import-document:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_IMPORT_DOCUMENT_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_IMPORT_FILE
@@ -217,9 +203,9 @@ services:
       opencti:
         condition: service_healthy
   connector-analysis:
-    image: opencti/connector-import-document:6.4.4
+    image: opencti/connector-import-document:6.5.2
     environment:
-      - OPENCTI_URL=http://opencti:8282
+      - OPENCTI_URL=http://opencti:8080
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
       - CONNECTOR_ID=${CONNECTOR_ANALYSIS_ID} # Valid UUIDv4
       - CONNECTOR_TYPE=INTERNAL_ANALYSIS
@@ -234,57 +220,9 @@ services:
     depends_on:
       opencti:
         condition: service_healthy
-  connector-misp:
-    image: opencti/connector-misp:6.4.5
-    environment:
-      - OPENCTI_URL=http://opencti:8282
-      - OPENCTI_TOKEN=ChangeMe
-      - CONNECTOR_ID=ChangeMe
-      - CONNECTOR_NAME=MISP
-      - CONNECTOR_SCOPE=misp
-      - CONNECTOR_LOG_LEVEL=error
-      - CONNECTOR_EXPOSE_METRICS=false
-      - MISP_URL=https://localhost:10443 # Required
-      - MISP_REFERENCE_URL= # Optional, will be used to create external reference to MISP event (default is "url")
-      - MISP_KEY=ChangeMe # Required
-      - MISP_SSL_VERIFY=false # Required
-      - MISP_DATETIME_ATTRIBUTE=timestamp # Required, filter to be used in query for new MISP events
-      - MISP_DATE_FILTER_FIELD=timestamp # Required, field to filter on date
-      - MISP_REPORT_DESCRIPTION_ATTRIBUTE_FILTER= # Optional, filter to be used to find the attribute with report description (example: "type=comment,category=Internal reference")
-      - MISP_CREATE_REPORTS=true # Required, create report for MISP event
-      - MISP_CREATE_INDICATORS=true # Required, create indicators from attributes
-      - MISP_CREATE_OBSERVABLES=true # Required, create observables from attributes
-      - MISP_CREATE_OBJECT_OBSERVABLES=true # Required, create text observables for MISP objects
-      - MISP_CREATE_TAGS_AS_LABELS=true # Optional, create tags as labels (sanitize MISP tag to OpenCTI labels)
-      - MISP_GUESS_THREAT_FROM_TAGS=false # Optional, try to guess threats (threat actor, intrusion set, malware, etc.) from MISP tags when they are present in OpenCTI
-      - MISP_AUTHOR_FROM_TAGS=false # Optional, map creator:XX=YY (author of event will be YY instead of the author of the event)
-      - MISP_MARKINGS_FROM_TAGS=false # Optional, map marking:XX=YY (in addition to TLP, add XX:YY as marking definition, where XX is marking type, YY is marking value)
-      - MISP_ENFORCE_WARNING_LIST=false # Optional, enforce warning list in MISP queries
-      - MISP_REPORT_TYPE=misp-event # Optional, report_class if creating report for event
-      - MISP_IMPORT_FROM_DATE=2000-01-01 # Required, import all event from this date
-      - MISP_IMPORT_TAGS= # Optional, list of tags used to filter events to import
-      - MISP_IMPORT_TAGS_NOT= # Optional, list of tags to not include
-      - MISP_IMPORT_CREATOR_ORGS= # Optional, only import events created by those orgs (put the identifiers here)
-      - MISP_IMPORT_CREATOR_ORGS_NOT= # Optional, do not import events created by those orgs (put the identifiers here)
-      - MISP_IMPORT_OWNER_ORGS= # Optional, only import events owned by those orgs (put the identifiers here)
-      - MISP_IMPORT_OWNER_ORGS_NOT= # Optional, do not import events owned by those orgs (put the identifiers here)
-      - MISP_IMPORT_KEYWORD= # Optional, search only events based on a keyword
-      - MISP_IMPORT_DISTRIBUTION_LEVELS= # Optional, only import events with the given distribution levels (ex: 0,1,2,3)
-      - MISP_IMPORT_THREAT_LEVELS= # Optional only import events with the given threat levels (ex: 1,2,3,4)
-      - MISP_IMPORT_ONLY_PUBLISHED=false
-      - MISP_IMPORT_WITH_ATTACHMENTS=false # Optional, try to import a PDF file from the attachment attribute
-      - MISP_IMPORT_TO_IDS_NO_SCORE=40 # Optional, use as a score for the indicator/observable if the attribute to_ids is no
-      - MISP_IMPORT_UNSUPPORTED_OBSERVABLES_AS_TEXT=false #  Optional, import unsupported observable as x_opencti_text
-      - MISP_IMPORT_UNSUPPORTED_OBSERVABLES_AS_TEXT_TRANSPARENT=true #  Optional, import unsupported observable as x_opencti_text just with the value
-      - MISP_INTERVAL=5 # Required, in minutes
-    restart: always
 
 volumes:
   esdata:
   s3data:
   redisdata:
   amqpdata:
-
-networks:
-  socarium-network:
-    external: true
