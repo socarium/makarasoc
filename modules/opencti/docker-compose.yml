@@ -237,14 +237,14 @@ services:
   connector-misp:
     image: opencti/connector-misp:6.4.5
     environment:
-      - OPENCTI_URL=http://103.82.92.195:8282
+      - OPENCTI_URL=http://opencti:8282
       - OPENCTI_TOKEN=ChangeMe
       - CONNECTOR_ID=ChangeMe
       - CONNECTOR_NAME=MISP
       - CONNECTOR_SCOPE=misp
       - CONNECTOR_LOG_LEVEL=error
       - CONNECTOR_EXPOSE_METRICS=false
-      - MISP_URL=https://103.82.92.195:10443 # Required
+      - MISP_URL=https://localhost:10443 # Required
       - MISP_REFERENCE_URL= # Optional, will be used to create external reference to MISP event (default is "url")
       - MISP_KEY=ChangeMe # Required
       - MISP_SSL_VERIFY=false # Required
