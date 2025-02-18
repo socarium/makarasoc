@@ -11,6 +11,8 @@ else
     sudo docker network create socarium-network
 fi
 
+cp .env.sample .env
+
 sudo apt install -y jq
 sleep 10 #Check the system
 (cat << EOF
