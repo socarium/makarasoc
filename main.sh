@@ -111,9 +111,9 @@ deploy_velociraptor() {
 
 integration_wazuh_iris() {
         log "Integration Wazuh - DFIR IRIS..."
-        sudo cp $BASE_DIR/modules/wazuh/integration-iris.py /var/lib/docker/volumes/single-node_wazuh_integrations/_data/integration-iris.py
-        sudo docker exec -ti single-node-wazuh.manager-1 chown root:wazuh /var/ossec/integrations/integration-iris.py
-        sudo docker exec -ti single-node-wazuh.manager-1 chmod 750 /var/ossec/integrations/integration-iris.py
+        sudo cp $BASE_DIR/modules/wazuh/custom-iris.py /var/lib/docker/volumes/single-node_wazuh_integrations/_data/custom-iris.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chown root:wazuh /var/ossec/integrations/custom-iris.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chmod 750 /var/ossec/integrations/custom-iris.py
         cd $BASE_DIR
         sudo docker-compose -f $BASE_DIR/wazuh-docker/single-node/docker-compose.yml down
         sudo docker-compose -f $BASE_DIR/wazuh-docker/single-node/docker-compose.yml up -d
@@ -122,9 +122,9 @@ integration_wazuh_iris() {
 
 integration_wazuh_misp() {
         log "Integration Wazuh - MISP..."
-        sudo cp $BASE_DIR/modules/wazuh/integration-misp.py /var/lib/docker/volumes/single-node_wazuh_integrations/_data/integration-misp.py
-        sudo docker exec -ti single-node-wazuh.manager-1 chown root:wazuh /var/ossec/integrations/integration-misp.py
-        sudo docker exec -ti single-node-wazuh.manager-1 chmod 750 /var/ossec/integrations/integration-misp.py
+        sudo cp $BASE_DIR/modules/wazuh/custom-misp.py /var/lib/docker/volumes/single-node_wazuh_integrations/_data/custom-misp.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chown root:wazuh /var/ossec/integrations/custom-misp.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chmod 750 /var/ossec/integrations/custom-misp.py
         sudo cp $BASE_DIR/modules/wazuh/local_rules.xml /var/lib/docker/volumes/single-node_wazuh_etc/_data/rules/local_rules.xml
         sudo docker exec -ti single-node-wazuh.manager-1 chown wazuh:wazuh /var/ossec/etc/rules/local_rules.xml
         sudo docker exec -ti single-node-wazuh.manager-1 chmod 550 /var/ossec/etc/rules/local_rules.xml
