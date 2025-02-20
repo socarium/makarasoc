@@ -76,7 +76,7 @@
 
 ## Installation and Setup
 
-Installation and configuration manuals please refers into Wiki's (https://github.com/socarium/makarasoc/wiki).
+Installation and configuration manuals please refers into [Wiki's](https://github.com/socarium/makarasoc/wiki).
 
 ---
 
