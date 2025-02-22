@@ -160,7 +160,7 @@ if [ ! -d "Shuffle" ]; then
 
     sudo chown -R 1000:1000 shuffle-database
     sudo swapoff -a
-    sudo sysctl -w vm.max_map_count=262144
+    # sudo sysctl -w vm.max_map_count=262144
 
     # Create the socarium-network if it doesn't exist
     echo "Ensuring socarium-network exists..."
