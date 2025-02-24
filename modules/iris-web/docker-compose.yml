@@ -56,8 +56,6 @@ volumes:
 
 networks:
   iris_backend:
-    name: iris_backend
   iris_frontend:
-    name: iris_frontend
   socarium-network:
     external: true
