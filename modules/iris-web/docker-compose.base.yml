@@ -21,6 +21,7 @@ services:
     container_name: iriswebapp_rabbitmq
     restart: always
     networks:
+      - iris_backend
       - socarium-network
 
   db:
@@ -33,6 +34,7 @@ services:
       - POSTGRES_ADMIN_PASSWORD
       - POSTGRES_DB
     networks:
+      - iris_backend
       - socarium-network
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -64,6 +66,8 @@ services:
       - IRIS_SECRET_KEY
       - IRIS_SECURITY_PASSWORD_SALT
     networks:
+      - iris_backend
+      - iris_frontend
       - socarium-network
 
   worker:
@@ -95,6 +99,7 @@ services:
       - IRIS_SECURITY_PASSWORD_SALT
       - IRIS_WORKER
     networks:
+      - iris_backend
       - socarium-network
 
   nginx:
@@ -108,6 +113,7 @@ services:
       - KEY_FILENAME
       - IRIS_AUTHENTICATION_TYPE
     networks:
+      - iris_frontend
       - socarium-network
     ports:
       - "8080:80"
@@ -125,5 +131,9 @@ volumes:
   db_data:
 
 networks:
+  iris_backend:
+    name: iris_backend
+  iris_frontend:
+    name: iris_frontend
   socarium-network:
     external: true
