@@ -35,7 +35,7 @@ Run()
     echo "[BUILDnPUSH2IRIS] Found latest module file: $latest"
     echo "[BUILDnPUSH2IRIS] Copy module file to worker container.."
     sudo docker cp $latest iriswebapp_worker:/iriswebapp/dependencies/$module
-    sudo docker exec -it iriswebapp_app /bin/sh -c "chown root:root dependencies/$module"
+    sudo docker exec -it iriswebapp_worker /bin/sh -c "chown root:root dependencies/$module"
     echo "[BUILDnPUSH2IRIS] Installing module in worker container.."
     sudo docker exec -it iriswebapp_worker /bin/sh -c "pip3 install dependencies/$module --force-reinstall"
 
