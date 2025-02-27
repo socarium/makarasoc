@@ -100,7 +100,7 @@ The proof of concept for attack simulations:
 
 ## Contributing
 
-We welcome contributions to improve MakaraSOC. Please submit issues or pull requests on the repository.
+We welcome contributions to improve **MakaraSOC**. Please submit issues or pull requests on the repository.
 
 ---
 
