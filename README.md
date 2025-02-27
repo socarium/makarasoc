@@ -1,4 +1,19 @@
+<div align="center" width="100" height="100">
+
+  <h3 align="center">System Overview</h3>
+
+  <p align="center">
+    <br />
+    <a href="https://github.com/socarium/makarasoc/blob/main/images/makara-logo2.png">
+    <img src="images/makara.png">
+    </a>
+    <br />
+    <br />
+  </p>
+</div>
+
 # MakaraSOC: Comprehensive SOC Management Package
+
 
 ---
 
