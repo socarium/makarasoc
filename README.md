@@ -85,9 +85,9 @@ Installation and configuration manuals please refers into [Wiki's](https://githu
 ---
 
 
-## Proof of Concept (PoC) Coming soon
+## Proof of Concept (PoC)
 
-The `poc/` folder contains scripts and descriptions for attack simulations:
+The proof of concept for attack simulations:
 
 ### **Attack Simulations**
 
