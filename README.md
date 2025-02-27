@@ -90,23 +90,7 @@ The `poc/` folder contains scripts and descriptions for attack simulations:
 | **Simulation**            | **Description**                                                                 |
 |---------------------------|---------------------------------------------------------------------------------|
 | **Brute Force Attack**    | Simulates multiple failed login attempts to test detection capabilities.        |
-| **Ransomware Behavior**   | Mimics file encryption to test response to ransomware-like activities.          |
 
-### **File Structure**
-
-| **Folder**                | **Content**                                                                 |
-|---------------------------|-----------------------------------------------------------------------------|
-| `poc/attack_simulation_1/description.md` | Describes the brute force attack simulation.                     |
-| `poc/attack_simulation_1/scripts/simulate_attack.sh` | Bash script for brute force attack.                     |
-| `poc/attack_simulation_2/description.md` | Describes the ransomware behavior simulation.                   |
-| `poc/attack_simulation_2/scripts/simulate_ransomware.py` | Python script for ransomware simulation.            |
-
----
-
-## Advanced Features
-
-### **Monitoring and Metrics**
-- Integrate **Prometheus** and **Grafana** for monitoring resource usage and SOC metrics.
 
 ---
 
