@@ -1,11 +1,9 @@
 <div align="center" width="100" height="100">
 
-  <h3 align="center">System Overview</h3>
-
   <p align="center">
     <br />
     <a href="https://github.com/socarium/makarasoc/blob/main/images/makara-logo2.png">
-    <img src="images/makara.png">
+    <img src="images/makara-logo2.png">
     </a>
     <br />
     <br />
