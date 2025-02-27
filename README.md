@@ -55,15 +55,6 @@
 
 ---
 
-### **PoC Folder Structure**
-
-| **Simulation**            | **Description**                                               |
-|---------------------------|-------------------------------------------------------------|
-| **Attack Simulation 1**   | `poc/attack_simulation_1/description.md`, `scripts/`         |
-| **Attack Simulation 2**   | `poc/attack_simulation_2/description.md`, `scripts/`         |
-
----
-
 ## Prerequisites
 
 ### **Minimum System Requirements**
