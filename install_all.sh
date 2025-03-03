@@ -111,8 +111,8 @@ echo "Installing DFIR IRIS..."
 if [ ! -d "iris-web" ]; then
     git clone https://github.com/dfir-iris/iris-web.git
     cd iris-web
-    # switch to stable version v2.4.20
-    git checkout v2.4.20
+    # switch to stable version v2.4.19
+    git checkout v2.4.19
 
     # Create the socarium-network if it doesn't exist
     echo "Ensuring socarium-network exists..."
