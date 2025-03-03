@@ -73,7 +73,7 @@
 ### **Minimum System Requirements**
 
 - **Memory:** Minimum 16GB RAM.
-- **Disk Space:** At least 100GB of free space.
+- **Disk Space:** At least 200GB of free space.
 - **Operating System:** Linux (Ubuntu recommended).
 
 ---
