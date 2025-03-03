@@ -134,6 +134,17 @@ integration_wazuh_misp() {
         log "Integration Wazuh-MISP successfully."
 }
 
+integration_wazuh_shuffle() {
+        log "Integration Wazuh - Shuffle..."
+        sudo cp $BASE_DIR/modules/wazuh/shuffle.py /var/lib/docker/volumes/single-node_wazuh_integrations/_data/shuffle.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chown root:wazuh /var/ossec/integrations/shuffle.py
+        sudo docker exec -ti single-node-wazuh.manager-1 chmod 750 /var/ossec/integrations/shuffle.py
+        cd $BASE_DIR
+        sudo docker-compose -f $BASE_DIR/wazuh-docker/single-node/docker-compose.yml down
+        sudo docker-compose -f $BASE_DIR/wazuh-docker/single-node/docker-compose.yml up -d
+        log "Integration Wazuh - Shuffle successfully."
+}
+
 iris_module_wazuhindexer() {
         log "Deploy DFIR IRIS Module Wazuh Indexer"
         cd $BASE_DIR/modules/iris-wazuhindexer-module
@@ -175,20 +186,22 @@ tools_config() {
         SECONDARY_CHOICE=$(whiptail --title "Configuration Menu" --menu "Choose a configuration option:" 20 78 12 \
             "1" "Integration Wazuh - DFIR IRIS" \
             "2" "Integration Wazuh - MISP" \
-            "3" "DFIR IRIS Module Wazuh Indexer" \
-            "4" "DFIR IRIS Module Velociraptor Quarantine"\
-            "5" "DFIR IRIS Module Velociraptor Remove Quarantine"\
-            "6" "DFIR IRIS Module Velociraptor Artifact"\
-            "7" "Return to Main Menu" 3>&1 1>&2 2>&3)
+            "3" "Integration Wazuh - Shuffle"\
+            "4" "DFIR IRIS Module Wazuh Indexer" \
+            "5" "DFIR IRIS Module Velociraptor Quarantine"\
+            "6" "DFIR IRIS Module Velociraptor Remove Quarantine"\
+            "7" "DFIR IRIS Module Velociraptor Artifact"\
+            "8" "Return to Main Menu" 3>&1 1>&2 2>&3)
 
         case $SECONDARY_CHOICE in
             1) integration_wazuh_iris ;;
             2) integration_wazuh_misp ;;
-            3) iris_module_wazuhindexer ;;
-            4) iris_module_veloquarantine ;;
-            5) iris_module_veloquarantineremove ;;
-            6) iris_module_veloartifact ;;
-            7) log "Returning to Main Menu."; break ;; # Exit secondary menu
+            3) integration_wazuh_shuffle ;;
+            4) iris_module_wazuhindexer ;;
+            5) iris_module_veloquarantine ;;
+            6) iris_module_veloquarantineremove ;;
+            7) iris_module_veloartifact ;;
+            8) log "Returning to Main Menu."; break ;; # Exit secondary menu
             *) log "Invalid option. Please try again." ;;
         esac
     done
