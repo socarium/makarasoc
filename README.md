@@ -17,7 +17,7 @@
 
 ## Overview
 
-**MakaraSOC** is a modular, open-source Security Operations Center (SOC) management package designed to simplify the deployment, management, and testing of SOC platforms. Developed collaboratively **idCARE UI** and **Socarium Team**, supported by **UI-JICA Project Cybersecurity**, MakaraSOC integrates industry-standard tools like Wazuh, DFIR IRIS, Shuffle, MISP, Velociraptor, and OpenCTI, providing a streamlined approach to cybersecurity monitoring, analysis, and incident response.
+**MakaraSOC** is a modular, open-source Security Operations Center (SOC) management package designed to simplify the deployment, management, and testing of SOC platforms. Developed collaboratively **idCARE UI** and **Socarium Team**, supported by **UI-JICA Project Cybersecurity**. MakaraSOC integrates industry-standard tools like Wazuh, DFIR IRIS, Shuffle, MISP, Velociraptor, and OpenCTI, providing a streamlined approach to cybersecurity monitoring, analysis, and incident response.
 
 <div align="center" width="100" height="100">
 
