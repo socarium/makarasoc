@@ -72,6 +72,7 @@
 
 ### **Minimum System Requirements**
 
+- **Processor:** 4Cores
 - **Memory:** Minimum 16GB RAM.
 - **Disk Space:** At least 200GB of free space.
 - **Operating System:** Linux (Ubuntu recommended).
